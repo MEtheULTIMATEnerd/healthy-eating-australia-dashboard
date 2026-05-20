@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The barriers are practical, not just educational",
+    "subtitle": "Lollipop ranking of access, intake and outcome barriers.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/lollipop_barriers.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": 3,
+        "color": "#d7ded8"
+      },
+      "encoding": {
+        "y": {
+          "field": "barrier",
+          "type": "nominal",
+          "sort": {
+            "field": "percent",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "percent",
+          "type": "quantitative",
+          "title": "%"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 160,
+        "color": "#e66a35",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "barrier",
+          "type": "nominal",
+          "sort": {
+            "field": "percent",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "percent",
+          "type": "quantitative",
+          "title": "%"
+        },
+        "tooltip": [
+          {
+            "field": "barrier"
+          },
+          {
+            "field": "group"
+          },
+          {
+            "field": "percent"
+          }
+        ]
+      }
+    }
+  ]
+}

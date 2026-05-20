@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Recommended plates, actual plates",
+    "subtitle": "Most Australian Dietary Guideline groups sit below recommended serves.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/healthy_vs_actual_intake.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "recommended_serves",
+        "actual_serves"
+      ],
+      "as": [
+        "measure",
+        "serves"
+      ]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "y": {
+      "field": "food_group",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
+    },
+    "x": {
+      "field": "serves",
+      "type": "quantitative",
+      "title": "Serves per 10,000 kJ"
+    },
+    "color": {
+      "field": "measure",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "recommended_serves",
+          "actual_serves"
+        ],
+        "range": [
+          "#2e7d62",
+          "#e66a35"
+        ]
+      },
+      "legend": {
+        "labelExpr": "datum.label == 'recommended_serves' ? 'Recommended' : 'Actual'"
+      }
+    },
+    "xOffset": {
+      "field": "measure"
+    },
+    "tooltip": [
+      {
+        "field": "food_group"
+      },
+      {
+        "field": "measure"
+      },
+      {
+        "field": "serves",
+        "format": ".1f"
+      }
+    ]
+  }
+}

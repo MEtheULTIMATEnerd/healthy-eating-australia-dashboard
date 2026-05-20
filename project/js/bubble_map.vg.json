@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Exposure concentrates differently across the map",
+    "subtitle": "Bubbles show the same proxy at state centroids for direct comparison.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/fastfood_density.csv"
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -27
+    ],
+    "scale": 520
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states.geojson",
+        "format": {
+          "type": "geojson"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#edf3ef",
+        "stroke": "#cfd8d2"
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.78,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "size": {
+          "field": "fast_food_pressure_proxy",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              120,
+              1600
+            ]
+          },
+          "title": "Proxy"
+        },
+        "color": {
+          "field": "obesity_rate",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              "#f3ba77",
+              "#c7432f"
+            ]
+          },
+          "title": "Obesity %"
+        },
+        "tooltip": [
+          {
+            "field": "state"
+          },
+          {
+            "field": "fast_food_pressure_proxy"
+          },
+          {
+            "field": "obesity_rate"
+          }
+        ]
+      }
+    }
+  ]
+}

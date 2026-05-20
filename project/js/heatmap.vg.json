@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Convenience exposure is steepest for lower-income children",
+    "subtitle": "Selected beverage consumption by age band and disadvantage quintile.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/heatmap_age_income.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 4
+  },
+  "encoding": {
+    "x": {
+      "field": "income_group",
+      "type": "ordinal",
+      "title": "Disadvantage quintile"
+    },
+    "y": {
+      "field": "age_group",
+      "type": "nominal",
+      "title": null
+    },
+    "color": {
+      "field": "selected_beverage_percent",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "#f8e7d2",
+          "#e66a35",
+          "#9f2d26"
+        ]
+      },
+      "title": "% consumed"
+    },
+    "tooltip": [
+      {
+        "field": "age_group"
+      },
+      {
+        "field": "income_group"
+      },
+      {
+        "field": "selected_beverage_percent",
+        "format": ".1f"
+      }
+    ]
+  }
+}
