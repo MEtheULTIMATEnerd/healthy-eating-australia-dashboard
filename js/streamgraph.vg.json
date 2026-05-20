@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Discretionary energy is embedded across age",
+    "subtitle": "Selected discretionary food groups as a share of daily energy.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/discretionary_stream.csv"
+  },
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "age_group",
+      "type": "ordinal",
+      "title": "Age group"
+    },
+    "y": {
+      "field": "energy_percent",
+      "type": "quantitative",
+      "stack": "center",
+      "title": "Discretionary energy share"
+    },
+    "color": {
+      "field": "category",
+      "scale": {
+        "range": [
+          "#c7432f",
+          "#e66a35",
+          "#f0aa4b",
+          "#8e5b48",
+          "#5c4b51",
+          "#2f9c95"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "age_group"
+      },
+      {
+        "field": "category"
+      },
+      {
+        "field": "energy_percent",
+        "format": ".1f"
+      }
+    ]
+  }
+}

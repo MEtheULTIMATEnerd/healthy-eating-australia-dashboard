@@ -1,0 +1,16 @@
+source,target,value,stage
+First quintile,Time pressure proxy,17.2,constraint
+Time pressure proxy,Sweetened drink exposure,31.9,choice
+Sweetened drink exposure,Obesity outcome,30.7,outcome
+Second quintile,Time pressure proxy,14.9,constraint
+Time pressure proxy,Sweetened drink exposure,32.9,choice
+Sweetened drink exposure,Obesity outcome,33.2,outcome
+Third quintile,Time pressure proxy,12.1,constraint
+Time pressure proxy,Sweetened drink exposure,29.0,choice
+Sweetened drink exposure,Obesity outcome,35.0,outcome
+Fourth quintile,Time pressure proxy,9.1,constraint
+Time pressure proxy,Sweetened drink exposure,25.8,choice
+Sweetened drink exposure,Obesity outcome,33.9,outcome
+Fifth quintile,Time pressure proxy,7.8,constraint
+Time pressure proxy,Sweetened drink exposure,24.9,choice
+Sweetened drink exposure,Obesity outcome,37.5,outcome

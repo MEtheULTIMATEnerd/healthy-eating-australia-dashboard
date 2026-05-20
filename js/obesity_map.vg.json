@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Obesity outcomes are geographically uneven",
+    "subtitle": "Adult obesity rates by state and territory, NHS 2022.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/australia_states.geojson",
+    "format": {
+      "type": "geojson"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.state",
+      "from": {
+        "data": {
+          "url": "data/cleaned/obesity_by_state.csv"
+        },
+        "key": "state",
+        "fields": [
+          "obesity_rate",
+          "overweight_obese_rate"
+        ]
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -27
+    ],
+    "scale": 520
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "color": {
+      "field": "obesity_rate",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "#dceee4",
+          "#7f7aa8",
+          "#4b345f"
+        ]
+      },
+      "title": "Obesity %"
+    },
+    "tooltip": [
+      {
+        "field": "properties.state",
+        "title": "State"
+      },
+      {
+        "field": "obesity_rate",
+        "format": ".1f"
+      },
+      {
+        "field": "overweight_obese_rate",
+        "format": ".1f"
+      }
+    ]
+  }
+}

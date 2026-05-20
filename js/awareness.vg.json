@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The health signal is visible, but incomplete",
+    "subtitle": "Sweetened beverage participation fell while fruit-and-vegetable gaps persisted.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/food_awareness.csv"
+  },
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 70
+    },
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null
+    },
+    "y": {
+      "field": "percent",
+      "type": "quantitative",
+      "title": "% of people",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "color": {
+      "field": "metric",
+      "type": "nominal",
+      "scale": {
+        "range": [
+          "#2e7d62",
+          "#e66a35",
+          "#c7432f",
+          "#2f9c95"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year"
+      },
+      {
+        "field": "metric"
+      },
+      {
+        "field": "percent",
+        "format": ".1f"
+      }
+    ]
+  }
+}

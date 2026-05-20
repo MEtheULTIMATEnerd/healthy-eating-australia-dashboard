@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Healthy Intentions, Unhealthy Reality</title>
+    <meta
+      name="description"
+      content="A Vega-Lite storytelling visualisation about healthy eating intentions and unhealthy food realities in Australia."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero section-band">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Australia, 2022-2024</p>
+            <h1>Healthy Intentions, Unhealthy Reality</h1>
+            <p class="subtitle">Healthy Eating vs Fast Food Reality in Australia</p>
+            <p class="lead">
+              Australians understand the message: eat more vegetables, more fruit, fewer discretionary foods. Yet the
+              surrounding environment still makes unhealthy choices cheap, visible, convenient, and unequally distributed.
+            </p>
+          </div>
+          <div class="stat-stack" aria-label="Key statistics">
+            <article class="stat-card">
+              <span>93.5%</span>
+              <p>of adults did not meet the vegetable recommendation in the 2022 National Health Survey.</p>
+            </article>
+            <article class="stat-card warm">
+              <span>28.9%</span>
+              <p>of Australians aged 2+ consumed selected sweetened beverages in 2023.</p>
+            </article>
+            <article class="stat-card dark">
+              <span>31.7%</span>
+              <p>of adults were obese in 2022, with stronger impacts outside the healthiest environments.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-section two-column">
+        <div class="section-copy sticky-copy">
+          <p class="section-kicker">1. Health awareness</p>
+          <h2>Knowledge is not the main issue.</h2>
+          <p>
+            Sweetened drink consumption has fallen over time, suggesting that health messages do land. The problem is
+            that awareness has not translated into everyday intake: fruit and vegetable recommendations remain far out
+            of reach for most adults.
+          </p>
+          <p class="annotation">Insight: healthier intention exists, but the food environment keeps pulling behaviour back.</p>
+        </div>
+        <div class="chart-column">
+          <figure class="chart-card">
+            <div id="awareness-chart" class="chart"></div>
+          </figure>
+          <figure class="chart-card compact">
+            <div id="intake-chart" class="chart"></div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="story-section full-bleed warm-band">
+        <div class="section-copy wide-copy">
+          <p class="section-kicker">2. Fast food expansion</p>
+          <h2>Unhealthy options are geographically embedded.</h2>
+          <p>
+            The provided datasets do not include restaurant-chain locations, so this section uses a transparent proxy:
+            adult obesity plus unmet fruit and vegetable recommendations by state. It maps where unhealthy exposure and
+            health risk are most visible in the available public data.
+          </p>
+        </div>
+        <div class="map-grid">
+          <figure class="chart-card">
+            <div id="fastfood-map" class="chart"></div>
+          </figure>
+          <figure class="chart-card">
+            <div id="bubble-map" class="chart"></div>
+          </figure>
+        </div>
+        <figure class="chart-card wide">
+          <div id="streamgraph" class="chart"></div>
+        </figure>
+      </section>
+
+      <section class="story-section standout">
+        <div class="section-copy wide-copy inverted">
+          <p class="section-kicker">3. Convenience and behaviour</p>
+          <h2>Convenience is the hinge between intention and action.</h2>
+          <p>
+            Lower socioeconomic groups face a harsher behavioural landscape: more constraint, more sweetened beverage
+            exposure in key groups, and higher obesity outcomes. This section deliberately stands apart because it is
+            the turning point of the story.
+          </p>
+        </div>
+        <div class="chart-pair">
+          <figure class="chart-card dark-card">
+            <div id="sankey" class="chart"></div>
+          </figure>
+          <figure class="chart-card dark-card">
+            <div id="heatmap" class="chart"></div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="story-section two-column">
+        <div class="section-copy sticky-copy">
+          <p class="section-kicker">4. Health outcomes</p>
+          <h2>The consequences are visible on the map.</h2>
+          <p>
+            Obesity is not distributed evenly across Australia. The state-level scatter does not claim causality; it
+            shows that places with higher unhealthy-food pressure proxies often sit higher on obesity outcomes too.
+          </p>
+          <p class="annotation">Insight: exposure and outcome align enough to make the environment impossible to ignore.</p>
+        </div>
+        <div class="chart-column">
+          <figure class="chart-card">
+            <div id="obesity-map" class="chart"></div>
+          </figure>
+          <figure class="chart-card compact">
+            <div id="scatter" class="chart"></div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="story-section full-bleed divide-band">
+        <div class="section-copy wide-copy">
+          <p class="section-kicker">5. Socioeconomic divide</p>
+          <h2>Healthy eating is not equally accessible.</h2>
+          <p>
+            Food insecurity is much higher in the lowest income quintile and in lone-parent households. The barrier is
+            not only preference; it is price pressure, access, time, and household resilience.
+          </p>
+        </div>
+        <div class="chart-pair">
+          <figure class="chart-card">
+            <div id="dumbbell" class="chart"></div>
+          </figure>
+          <figure class="chart-card">
+            <div id="lollipop" class="chart"></div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="conclusion section-band">
+        <div class="conclusion-inner">
+          <p class="section-kicker">6. Conclusion</p>
+          <h2>Australia does not lack healthy intentions. It lacks equal healthy conditions.</h2>
+          <p>
+            The story moves from awareness to exposure, behaviour, outcomes, and inequality. The clearest insight is
+            that education alone cannot fix an environment where unhealthy choices are more convenient and healthy
+            choices are unevenly accessible.
+          </p>
+          <div class="source-note">
+            <p>
+              Sources: Australian Bureau of Statistics National Health Survey 2022; ABS National Nutrition and Physical
+              Activity Survey: Food and Nutrients 2023; ABS Apparent Consumption of Selected Foodstuffs 2023-24; AIHW
+              overweight and obesity data tables 2024. Visualisations created with Vega-Lite. Authored May 2026.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+age_group,category,energy_percent
+2-4,Soft drinks,0.2
+5-11,Soft drinks,0.8
+12-17,Soft drinks,2.6
+18-29,Soft drinks,2.8
+30-49,Soft drinks,2.0
+50-64,Soft drinks,1.4
+65-74,Soft drinks,0.9
+75+,Soft drinks,0.9
+2-4,Cereal-based discretionary foods,11.7
+5-11,Cereal-based discretionary foods,15.2
+12-17,Cereal-based discretionary foods,14.0
+18-29,Cereal-based discretionary foods,9.3
+30-49,Cereal-based discretionary foods,9.2
+50-64,Cereal-based discretionary foods,10.5
+65-74,Cereal-based discretionary foods,11.3
+75+,Cereal-based discretionary foods,13.6
+2-4,Sweet biscuits,4.2
+5-11,Sweet biscuits,3.7
+12-17,Sweet biscuits,2.4
+18-29,Sweet biscuits,1.7
+30-49,Sweet biscuits,2.5
+50-64,Sweet biscuits,2.4
+65-74,Sweet biscuits,3.0
+75+,Sweet biscuits,4.4
+2-4,Cakes and desserts,2.0
+5-11,Cakes and desserts,2.7
+12-17,Cakes and desserts,2.7
+18-29,Cakes and desserts,1.6
+30-49,Cakes and desserts,1.7
+50-64,Cakes and desserts,2.0
+65-74,Cakes and desserts,2.2
+75+,Cakes and desserts,2.4
+2-4,Pastries,0.4
+5-11,Pastries,1.6
+12-17,Pastries,2.6
+18-29,Pastries,2.2
+30-49,Pastries,1.7
+50-64,Pastries,2.8
+65-74,Pastries,2.5
+75+,Pastries,2.8
+2-4,Fats and oils,0.4
+5-11,Fats and oils,0.7
+12-17,Fats and oils,0.6
+18-29,Fats and oils,0.2
+30-49,Fats and oils,0.3
+50-64,Fats and oils,0.3
+65-74,Fats and oils,0.2
+75+,Fats and oils,0.3

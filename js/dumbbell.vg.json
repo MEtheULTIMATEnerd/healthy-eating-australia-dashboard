@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Food security splits sharply by income",
+    "subtitle": "A dumbbell-style access gap: secure versus insecure households.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/barriers_to_healthy_eating.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#ccd7cf"
+      },
+      "encoding": {
+        "y": {
+          "field": "income_group",
+          "type": "nominal",
+          "sort": null,
+          "title": null
+        },
+        "x": {
+          "field": "food_insecure",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "food_secure"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "color": "#c7432f"
+      },
+      "encoding": {
+        "y": {
+          "field": "income_group",
+          "type": "nominal",
+          "sort": null
+        },
+        "x": {
+          "field": "food_insecure",
+          "type": "quantitative",
+          "title": "% of households"
+        },
+        "tooltip": [
+          {
+            "field": "income_group"
+          },
+          {
+            "field": "food_insecure"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "color": "#2e7d62"
+      },
+      "encoding": {
+        "y": {
+          "field": "income_group",
+          "type": "nominal",
+          "sort": null
+        },
+        "x": {
+          "field": "food_secure",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "income_group"
+          },
+          {
+            "field": "food_secure"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "x": "shared"
+    }
+  }
+}

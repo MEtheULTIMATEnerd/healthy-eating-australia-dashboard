@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Exposure and outcomes move together",
+    "subtitle": "State-level proxy exposure versus adult obesity rate.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/obesity_by_state.csv"
+  },
+  "mark": {
+    "type": "circle",
+    "filled": true,
+    "opacity": 0.82,
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "fast_food_pressure_proxy",
+      "type": "quantitative",
+      "title": "Fast-food pressure proxy"
+    },
+    "y": {
+      "field": "obesity_rate",
+      "type": "quantitative",
+      "title": "Adult obesity (%)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "size": {
+      "field": "overweight_obese_rate",
+      "type": "quantitative",
+      "title": "Overweight/obese %",
+      "scale": {
+        "range": [
+          160,
+          900
+        ]
+      }
+    },
+    "color": {
+      "field": "urban_regional",
+      "scale": {
+        "range": [
+          "#2f9c95",
+          "#4b345f"
+        ]
+      },
+      "title": null
+    },
+    "tooltip": [
+      {
+        "field": "state"
+      },
+      {
+        "field": "fast_food_pressure_proxy"
+      },
+      {
+        "field": "obesity_rate"
+      },
+      {
+        "field": "overweight_obese_rate"
+      }
+    ]
+  }
+}

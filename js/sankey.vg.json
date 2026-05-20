@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "A constraint pathway, not a simple choice",
+    "subtitle": "A Vega-Lite flow proxy links disadvantage, time constraints, beverage exposure and obesity.",
+    "anchor": "start",
+    "font": "Poppins",
+    "fontSize": 18,
+    "subtitleFontSize": 12
+  },
+  "config": {
+    "font": "Inter",
+    "axis": {
+      "labelColor": "#46524f",
+      "titleColor": "#24302d",
+      "gridColor": "#e7ebe8",
+      "tickColor": "#d8ded9"
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleColor": "#24302d",
+      "labelColor": "#46524f"
+    }
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/cleaned/sankey_pathways.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 5
+  },
+  "encoding": {
+    "y": {
+      "field": "source",
+      "type": "nominal",
+      "sort": null,
+      "title": null
+    },
+    "x": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "% proxy value"
+    },
+    "color": {
+      "field": "stage",
+      "scale": {
+        "range": [
+          "#4b345f",
+          "#e66a35",
+          "#c7432f"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "source"
+      },
+      {
+        "field": "target"
+      },
+      {
+        "field": "value",
+        "format": ".1f"
+      }
+    ]
+  }
+}
