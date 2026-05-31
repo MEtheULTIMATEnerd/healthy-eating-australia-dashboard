@@ -2,291 +2,107 @@
   "type": "FeatureCollection",
   "features": [
     {
+      "id": "WA",
       "type": "Feature",
-      "properties": {
-        "state": "Western Australia"
-      },
+      "properties": { "STATE_CODE": "WA", "STATE_NAME": "Western Australia", "state": "Western Australia", "name": "Western Australia", "label_lon": 121.2, "label_lat": -25.5 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              112,
-              -14
-            ],
-            [
-              129,
-              -14
-            ],
-            [
-              129,
-              -35
-            ],
-            [
-              115,
-              -35
-            ],
-            [
-              113,
-              -30
-            ],
-            [
-              112,
-              -24
-            ],
-            [
-              112,
-              -14
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [129.0, -14.9], [129.0, -31.7], [127.3, -32.3], [124.3, -33.0], [123.5, -33.9],
+          [121.8, -33.9], [119.6, -34.1], [117.6, -35.1], [115.7, -34.5], [114.9, -33.7],
+          [115.8, -31.8], [114.9, -29.1], [113.6, -26.6], [113.4, -24.5], [114.0, -21.9],
+          [116.8, -20.6], [121.9, -18.5], [122.4, -17.6], [123.1, -16.7], [125.3, -14.6],
+          [127.9, -14.5], [129.0, -14.9]
+        ]]
       }
     },
     {
+      "id": "NT",
       "type": "Feature",
-      "properties": {
-        "state": "Northern Territory"
-      },
+      "properties": { "STATE_CODE": "NT", "STATE_NAME": "Northern Territory", "state": "Northern Territory", "name": "Northern Territory", "label_lon": 133.5, "label_lat": -19.5 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              129,
-              -11
-            ],
-            [
-              138,
-              -11
-            ],
-            [
-              138,
-              -26
-            ],
-            [
-              129,
-              -26
-            ],
-            [
-              129,
-              -11
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [129.0, -14.9], [129.0, -26.0], [138.0, -26.0], [138.0, -16.5], [136.7, -15.9],
+          [135.4, -14.7], [136.4, -12.0], [134.5, -12.1], [132.6, -11.6], [130.8, -12.0],
+          [130.0, -13.5], [129.0, -14.9]
+        ]]
       }
     },
     {
+      "id": "SA",
       "type": "Feature",
-      "properties": {
-        "state": "South Australia"
-      },
+      "properties": { "STATE_CODE": "SA", "STATE_NAME": "South Australia", "state": "South Australia", "name": "South Australia", "label_lon": 135.5, "label_lat": -30.2 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              129,
-              -26
-            ],
-            [
-              141,
-              -26
-            ],
-            [
-              141,
-              -38
-            ],
-            [
-              132,
-              -38
-            ],
-            [
-              129,
-              -35
-            ],
-            [
-              129,
-              -26
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [129.0, -26.0], [141.0, -26.0], [141.0, -38.0], [140.1, -37.5], [138.9, -35.6],
+          [137.6, -35.2], [136.9, -35.1], [136.1, -34.5], [135.6, -34.9], [134.8, -33.6],
+          [132.2, -32.0], [130.2, -31.6], [129.0, -31.7], [129.0, -26.0]
+        ]]
       }
     },
     {
+      "id": "QLD",
       "type": "Feature",
-      "properties": {
-        "state": "Queensland"
-      },
+      "properties": { "STATE_CODE": "QLD", "STATE_NAME": "Queensland", "state": "Queensland", "name": "Queensland", "label_lon": 145.0, "label_lat": -21.5 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              138,
-              -10
-            ],
-            [
-              154,
-              -10
-            ],
-            [
-              154,
-              -29
-            ],
-            [
-              141,
-              -29
-            ],
-            [
-              141,
-              -26
-            ],
-            [
-              138,
-              -26
-            ],
-            [
-              138,
-              -10
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [138.0, -16.5], [138.0, -26.0], [141.0, -26.0], [141.0, -29.0], [149.0, -29.0],
+          [153.5, -28.2], [153.1, -26.8], [152.5, -24.8], [150.8, -22.7], [149.5, -21.6],
+          [148.3, -20.0], [146.3, -18.5], [145.4, -16.3], [144.6, -14.3], [142.8, -10.7],
+          [141.6, -12.6], [141.5, -14.1], [140.9, -17.4], [138.0, -16.5]
+        ]]
       }
     },
     {
+      "id": "NSW",
       "type": "Feature",
-      "properties": {
-        "state": "New South Wales"
-      },
+      "properties": { "STATE_CODE": "NSW", "STATE_NAME": "New South Wales", "state": "New South Wales", "name": "New South Wales", "label_lon": 147.2, "label_lat": -32.8 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              141,
-              -29
-            ],
-            [
-              153.8,
-              -29
-            ],
-            [
-              153.8,
-              -37.7
-            ],
-            [
-              149.5,
-              -37.7
-            ],
-            [
-              141,
-              -34
-            ],
-            [
-              141,
-              -29
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [141.0, -29.0], [149.0, -29.0], [153.5, -28.2], [153.3, -29.7], [152.9, -31.5],
+          [151.8, -32.9], [151.2, -34.0], [150.7, -35.0], [149.9, -36.9], [149.5, -37.7],
+          [148.2, -36.8], [146.0, -36.0], [143.8, -35.4], [141.0, -34.0], [141.0, -29.0]
+        ]]
       }
     },
     {
+      "id": "VIC",
       "type": "Feature",
-      "properties": {
-        "state": "Victoria"
-      },
+      "properties": { "STATE_CODE": "VIC", "STATE_NAME": "Victoria", "state": "Victoria", "name": "Victoria", "label_lon": 144.4, "label_lat": -37.2 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              141,
-              -34
-            ],
-            [
-              149.5,
-              -37.7
-            ],
-            [
-              147.5,
-              -39.2
-            ],
-            [
-              141,
-              -38
-            ],
-            [
-              141,
-              -34
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [141.0, -34.0], [143.8, -35.4], [146.0, -36.0], [148.2, -36.8], [149.5, -37.7],
+          [147.5, -38.9], [145.6, -38.7], [144.4, -38.1], [142.4, -38.3], [141.0, -38.0],
+          [141.0, -34.0]
+        ]]
       }
     },
     {
+      "id": "TAS",
       "type": "Feature",
-      "properties": {
-        "state": "Tasmania"
-      },
+      "properties": { "STATE_CODE": "TAS", "STATE_NAME": "Tasmania", "state": "Tasmania", "name": "Tasmania", "label_lon": 146.6, "label_lat": -42.0 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              144.5,
-              -40.6
-            ],
-            [
-              148.5,
-              -40.6
-            ],
-            [
-              148.5,
-              -43.8
-            ],
-            [
-              144.5,
-              -43.8
-            ],
-            [
-              144.5,
-              -40.6
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [144.7, -41.1], [145.7, -40.9], [147.5, -41.0], [148.3, -41.6], [148.1, -42.1],
+          [147.4, -42.9], [146.8, -43.6], [146.0, -43.5], [145.3, -42.6], [144.7, -41.1]
+        ]]
       }
     },
     {
+      "id": "ACT",
       "type": "Feature",
-      "properties": {
-        "state": "Australian Capital Territory"
-      },
+      "properties": { "STATE_CODE": "ACT", "STATE_NAME": "Australian Capital Territory", "state": "Australian Capital Territory", "name": "Australian Capital Territory", "label_lon": 149.1, "label_lat": -35.4 },
       "geometry": {
         "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              148.75,
-              -35.1
-            ],
-            [
-              149.4,
-              -35.1
-            ],
-            [
-              149.4,
-              -35.65
-            ],
-            [
-              148.75,
-              -35.65
-            ],
-            [
-              148.75,
-              -35.1
-            ]
-          ]
-        ]
+        "coordinates": [[
+          [148.75, -35.1], [149.4, -35.1], [149.4, -35.65], [148.75, -35.65], [148.75, -35.1]
+        ]]
       }
     }
   ]

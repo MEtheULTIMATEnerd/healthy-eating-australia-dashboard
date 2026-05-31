@@ -1,0 +1,16 @@
+quintile,indicator,value,source_measure
+First quintile,Zero physical activity,17.2,Zero minutes of physical activity
+First quintile,Selected sweetened beverages,31.9,Total selected sugar- and intense-sweetened beverages
+First quintile,Overweight,30.7,Overweight BMI 25.00-29.99
+Second quintile,Zero physical activity,14.9,Zero minutes of physical activity
+Second quintile,Selected sweetened beverages,32.9,Total selected sugar- and intense-sweetened beverages
+Second quintile,Overweight,33.2,Overweight BMI 25.00-29.99
+Third quintile,Zero physical activity,12.1,Zero minutes of physical activity
+Third quintile,Selected sweetened beverages,29.0,Total selected sugar- and intense-sweetened beverages
+Third quintile,Overweight,35.0,Overweight BMI 25.00-29.99
+Fourth quintile,Zero physical activity,9.1,Zero minutes of physical activity
+Fourth quintile,Selected sweetened beverages,25.8,Total selected sugar- and intense-sweetened beverages
+Fourth quintile,Overweight,33.9,Overweight BMI 25.00-29.99
+Fifth quintile,Zero physical activity,7.8,Zero minutes of physical activity
+Fifth quintile,Selected sweetened beverages,24.9,Total selected sugar- and intense-sweetened beverages
+Fifth quintile,Overweight,37.5,Overweight BMI 25.00-29.99

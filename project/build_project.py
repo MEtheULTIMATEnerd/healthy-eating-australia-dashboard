@@ -214,10 +214,10 @@ def build_data():
     barriers = [
         {"barrier": "Vegetable recommendation not met", "group": "All adults", "percent": 93.5},
         {"barrier": "Fruit recommendation not met", "group": "All adults", "percent": 55.8},
-        {"barrier": "Food insecurity", "group": "Lowest income quintile", "percent": 23.2},
-        {"barrier": "Food insecurity", "group": "Lone-parent households", "percent": 34.0},
-        {"barrier": "Obesity", "group": "Lowest disadvantage quintile", "percent": 35.4},
         {"barrier": "Selected beverages consumed", "group": "Children, lowest quintile", "percent": 38.1},
+        {"barrier": "Obesity", "group": "Lowest disadvantage quintile", "percent": 35.4},
+        {"barrier": "Food insecurity: lone-parent households", "group": "Lone-parent households", "percent": 34.0},
+        {"barrier": "Food insecurity: lowest income quintile", "group": "Lowest income quintile", "percent": 23.2},
     ]
     write_csv("lollipop_barriers.csv", barriers, ["barrier", "group", "percent"])
 
@@ -260,14 +260,14 @@ def specs():
     intake = base_spec("Recommended plates, actual plates", "Most Australian Dietary Guideline groups sit below recommended serves.")
     intake.update({
         "data": {"url": "data/cleaned/healthy_vs_actual_intake.csv"},
-        "transform": [{"fold": ["recommended_serves", "actual_serves"], "as": ["measure", "serves"]}],
+        "transform": [{"fold": ["recommended_serves", "actual_serves"], "as": ["Measure", "Serves"]}],
         "mark": {"type": "bar", "cornerRadiusEnd": 3},
         "encoding": {
-            "y": {"field": "food_group", "type": "nominal", "sort": "-x", "title": None},
-            "x": {"field": "serves", "type": "quantitative", "title": "Serves per 10,000 kJ"},
-            "color": {"field": "measure", "type": "nominal", "scale": {"domain": ["recommended_serves", "actual_serves"], "range": [green, orange]}, "legend": {"labelExpr": "datum.label == 'recommended_serves' ? 'Recommended' : 'Actual'"}},
-            "xOffset": {"field": "measure"},
-            "tooltip": [{"field": "food_group"}, {"field": "measure"}, {"field": "serves", "format": ".1f"}],
+            "y": {"field": "food_group", "type": "nominal", "sort": ["Grains and cereals", "Vegetables", "Healthy oils", "Protein foods", "Dairy", "Fruit"], "title": None},
+            "x": {"field": "Serves", "type": "quantitative", "title": "Serves per 10,000 kJ"},
+            "color": {"field": "Measure", "type": "nominal", "scale": {"domain": ["recommended_serves", "actual_serves"], "range": [green, orange]}, "legend": {"labelExpr": "datum.label == 'recommended_serves' ? 'Recommended' : 'Actual'"}},
+            "yOffset": {"field": "Measure"},
+            "tooltip": [{"field": "food_group", "title": "Food Group"}, {"field": "Measure", "title": "Measure"}, {"field": "Serves", "title": "Serves per 10,000 kJ", "format": ".1f"}],
         },
     })
 
@@ -275,11 +275,14 @@ def specs():
     fastmap.update({
         "layer": [
             {
-                "data": {"url": "data/australia_states.geojson", "format": {"type": "geojson"}},
-                "transform": [{"lookup": "properties.state", "from": {"data": {"url": "data/cleaned/fastfood_density.csv"}, "key": "state", "fields": ["fast_food_pressure_proxy", "obesity_rate", "did_not_meet_vegetables"]}}],
+                "data": {"url": "data/australia_states.geojson", "format": {"type": "json", "property": "features"}},
+                "transform": [
+                    {"calculate": "datum.properties.STATE_NAME || datum.properties.state || datum.properties.name", "as": "state_name"},
+                    {"lookup": "state_name", "from": {"data": {"url": "data/cleaned/fastfood_density.csv"}, "key": "state", "fields": ["fast_food_pressure_proxy", "obesity_rate", "did_not_meet_vegetables"]}}
+                ],
                 "projection": {"type": "mercator", "center": [134, -27], "scale": 520},
                 "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
-                "encoding": {"color": {"field": "fast_food_pressure_proxy", "type": "quantitative", "title": "Pressure proxy", "scale": {"range": ["#d6ede1", "#f1a35f", red]}}, "tooltip": [{"field": "properties.state", "title": "State"}, {"field": "fast_food_pressure_proxy", "format": ".1f"}, {"field": "obesity_rate", "format": ".1f"}]},
+                "encoding": {"color": {"field": "fast_food_pressure_proxy", "type": "quantitative", "title": "Pressure proxy", "scale": {"range": ["#d6ede1", "#f1a35f", red]}}, "tooltip": [{"field": "state_name", "title": "State"}, {"field": "fast_food_pressure_proxy", "format": ".1f"}, {"field": "obesity_rate", "format": ".1f"}]},
             }
         ],
     })
@@ -289,7 +292,7 @@ def specs():
         "data": {"url": "data/cleaned/fastfood_density.csv"},
         "projection": {"type": "mercator", "center": [134, -27], "scale": 520},
         "layer": [
-            {"data": {"url": "data/australia_states.geojson", "format": {"type": "geojson"}}, "mark": {"type": "geoshape", "fill": "#edf3ef", "stroke": "#cfd8d2"}},
+            {"data": {"url": "data/australia_states.geojson", "format": {"type": "json", "property": "features"}}, "mark": {"type": "geoshape", "fill": "#edf3ef", "stroke": "#cfd8d2"}},
             {"mark": {"type": "circle", "opacity": 0.78, "stroke": "white", "strokeWidth": 1.5}, "encoding": {"longitude": {"field": "lon"}, "latitude": {"field": "lat"}, "size": {"field": "fast_food_pressure_proxy", "type": "quantitative", "scale": {"range": [120, 1600]}, "title": "Proxy"}, "color": {"field": "obesity_rate", "type": "quantitative", "scale": {"range": ["#f3ba77", red]}, "title": "Obesity %"}, "tooltip": [{"field": "state"}, {"field": "fast_food_pressure_proxy"}, {"field": "obesity_rate"}]}},
         ],
     })
@@ -332,11 +335,14 @@ def specs():
 
     obesity_map = base_spec("Obesity outcomes are geographically uneven", "Adult obesity rates by state and territory, NHS 2022.")
     obesity_map.update({
-        "data": {"url": "data/australia_states.geojson", "format": {"type": "geojson"}},
-        "transform": [{"lookup": "properties.state", "from": {"data": {"url": "data/cleaned/obesity_by_state.csv"}, "key": "state", "fields": ["obesity_rate", "overweight_obese_rate"]}}],
+        "data": {"url": "data/australia_states.geojson", "format": {"type": "json", "property": "features"}},
+        "transform": [
+            {"calculate": "datum.properties.STATE_NAME || datum.properties.state || datum.properties.name", "as": "state_name"},
+            {"lookup": "state_name", "from": {"data": {"url": "data/cleaned/obesity_by_state.csv"}, "key": "state", "fields": ["obesity_rate", "overweight_obese_rate"]}}
+        ],
         "projection": {"type": "mercator", "center": [134, -27], "scale": 520},
         "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
-        "encoding": {"color": {"field": "obesity_rate", "type": "quantitative", "scale": {"range": ["#dceee4", "#7f7aa8", purple]}, "title": "Obesity %"}, "tooltip": [{"field": "properties.state", "title": "State"}, {"field": "obesity_rate", "format": ".1f"}, {"field": "overweight_obese_rate", "format": ".1f"}]},
+        "encoding": {"color": {"field": "obesity_rate", "type": "quantitative", "scale": {"range": ["#dceee4", "#7f7aa8", purple]}, "title": "Obesity %"}, "tooltip": [{"field": "state_name", "title": "State"}, {"field": "obesity_rate", "format": ".1f"}, {"field": "overweight_obese_rate", "format": ".1f"}]},
     })
 
     scatter = base_spec("Exposure and outcomes move together", "State-level proxy exposure versus adult obesity rate.")
@@ -366,9 +372,10 @@ def specs():
     lollipop = base_spec("The barriers are practical, not just educational", "Lollipop ranking of access, intake and outcome barriers.")
     lollipop.update({
         "data": {"url": "data/cleaned/lollipop_barriers.csv"},
+        "encoding": {"y": {"field": "barrier", "type": "nominal", "sort": None, "title": None}},
         "layer": [
-            {"mark": {"type": "bar", "height": 3, "color": "#d7ded8"}, "encoding": {"y": {"field": "barrier", "type": "nominal", "sort": {"field": "percent", "order": "descending"}, "title": None}, "x": {"field": "percent", "type": "quantitative", "title": "%"}}},
-            {"mark": {"type": "circle", "size": 160, "color": orange, "stroke": "white", "strokeWidth": 1}, "encoding": {"y": {"field": "barrier", "type": "nominal", "sort": {"field": "percent", "order": "descending"}}, "x": {"field": "percent", "type": "quantitative", "title": "%"}, "tooltip": [{"field": "barrier"}, {"field": "group"}, {"field": "percent"}]}},
+            {"mark": {"type": "bar", "height": 3, "color": "#d7ded8"}, "encoding": {"x": {"field": "percent", "type": "quantitative", "title": "%"}}},
+            {"mark": {"type": "circle", "size": 160, "color": orange, "stroke": "white", "strokeWidth": 1}, "encoding": {"x": {"field": "percent", "type": "quantitative", "title": "%"}, "tooltip": [{"field": "barrier"}, {"field": "group"}, {"field": "percent"}]}},
         ],
     })
 

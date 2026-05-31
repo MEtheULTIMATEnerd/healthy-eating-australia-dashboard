@@ -1,0 +1,9 @@
+state,abbr,obesity_rate,overweight_obese_rate,did_not_meet_fruit,did_not_meet_vegetables,fast_food_pressure_proxy,urban_regional,lon,lat,fast_food_outlets
+New South Wales,NSW,30.4,63.1,54.2,93.2,59.3,Mostly urban,147.0,-32.2,3337
+Victoria,Vic,30.5,65.3,55.3,93.6,59.8,Mostly urban,144.4,-37.0,3601
+Queensland,Qld,34.6,68.8,57.1,94.9,62.2,Mostly urban,145.5,-22.5,1895
+South Australia,SA,33.3,68.0,58.3,92.2,61.3,More regional/remote,135.0,-30.2,782
+Western Australia,WA,31.5,68.0,56.2,92.3,60.0,More regional/remote,122.4,-25.5,1129
+Tasmania,Tas,37.0,70.5,58.7,89.1,61.6,More regional/remote,146.6,-42.0,166
+Northern Territory,NT,34.3,63.8,59.9,93.9,62.7,More regional/remote,133.6,-19.5,100
+Australian Capital Territory,ACT,29.7,64.0,58.6,92.3,60.2,Mostly urban,149.1,-35.3,239

@@ -1,97 +1,133 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "title": {
-    "text": "Fast-food pressure proxy by state",
-    "subtitle": "Proxy combines adult obesity and unmet fruit/vegetable recommendations.",
+    "text": "Top Fast-Food Chains in Australia",
+    "subtitle": "Top 10 chains by recorded OSM brand count.",
     "anchor": "start",
     "font": "Poppins",
     "fontSize": 18,
-    "subtitleFontSize": 12
+    "subtitleFontSize": 12,
+    "color": "#1f2724",
+    "subtitleColor": "#61706a",
+    "limit": 520,
+    "subtitleLimit": 600,
+    "offset": 10
   },
+
   "config": {
     "font": "Inter",
+
+    "view": {
+      "stroke": null
+    },
+
     "axis": {
       "labelColor": "#46524f",
       "titleColor": "#24302d",
       "gridColor": "#e7ebe8",
-      "tickColor": "#d8ded9"
-    },
-    "view": {
-      "stroke": null
-    },
-    "legend": {
-      "orient": "bottom",
-      "titleColor": "#24302d",
-      "labelColor": "#46524f"
+      "tickColor": "#d8ded9",
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 10,
+      "labelLimit": 190,
+      "labelPadding": 5
     }
   },
+
   "width": "container",
-  "height": 320,
+  "height": 410,
+
+  "data": {
+    "url": "data/cleaned/top_fastfood_chains.csv"
+  },
+
   "layer": [
     {
-      "data": {
-        "url": "data/australia_states.geojson",
-        "format": {
-          "type": "geojson"
-        }
-      },
-      "transform": [
-        {
-          "lookup": "properties.state",
-          "from": {
-            "data": {
-              "url": "data/cleaned/fastfood_density.csv"
-            },
-            "key": "state",
-            "fields": [
-              "fast_food_pressure_proxy",
-              "obesity_rate",
-              "did_not_meet_vegetables"
-            ]
-          }
-        }
-      ],
-      "projection": {
-        "type": "mercator",
-        "center": [
-          134,
-          -27
-        ],
-        "scale": 520
-      },
       "mark": {
-        "type": "geoshape",
-        "stroke": "white",
-        "strokeWidth": 1
+        "type": "bar",
+        "cornerRadiusEnd": 5,
+        "color": "#e66a35"
       },
+
       "encoding": {
-        "color": {
-          "field": "fast_food_pressure_proxy",
-          "type": "quantitative",
-          "title": "Pressure proxy",
-          "scale": {
-            "range": [
-              "#d6ede1",
-              "#f1a35f",
-              "#c7432f"
-            ]
-          }
+        "y": {
+          "field": "chain",
+          "type": "nominal",
+          "sort": {
+            "field": "outlets",
+            "order": "descending"
+          },
+          "title": "Fast-food chain"
         },
+
+        "x": {
+          "field": "outlets",
+          "type": "quantitative",
+          "title": "Number of mapped outlets"
+        },
+
         "tooltip": [
           {
-            "field": "properties.state",
-            "title": "State"
+            "field": "chain",
+            "title": "Fast-food chain"
           },
           {
-            "field": "fast_food_pressure_proxy",
-            "format": ".1f"
+            "field": "outlets",
+            "title": "Mapped outlets",
+            "format": ","
           },
           {
-            "field": "obesity_rate",
-            "format": ".1f"
+            "field": "coverage_note",
+            "title": "Coverage note"
           }
         ]
       }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#35413d"
+      },
+
+      "encoding": {
+        "y": {
+          "field": "chain",
+          "type": "nominal",
+          "sort": {
+            "field": "outlets",
+            "order": "descending"
+          }
+        },
+
+        "x": {
+          "field": "outlets",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "outlets",
+          "type": "quantitative"
+        }
+      }
     }
-  ]
+  ],
+
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+
+  "padding": {
+    "top": 18,
+    "right": 20,
+    "bottom": 12,
+    "left": 12
+  }
 }

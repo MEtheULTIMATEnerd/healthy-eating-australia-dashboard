@@ -1,105 +1,264 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Exposure concentrates differently across the map",
-    "subtitle": "Bubbles show the same proxy at state centroids for direct comparison.",
+    "text": "Fast Food Outlet Distribution Across Australia",
+    "subtitle": "Outlet-level OSM fast-food points coloured by broad cuisine category.",
     "anchor": "start",
     "font": "Poppins",
     "fontSize": 18,
-    "subtitleFontSize": 12
+    "subtitleFontSize": 12,
+    "color": "#1f2724",
+    "subtitleColor": "#61706a",
+    "limit": 520,
+    "subtitleLimit": 620,
+    "offset": 10
   },
   "config": {
     "font": "Inter",
-    "axis": {
-      "labelColor": "#46524f",
-      "titleColor": "#24302d",
-      "gridColor": "#e7ebe8",
-      "tickColor": "#d8ded9"
-    },
     "view": {
       "stroke": null
     },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 10,
+      "labelLimit": 170,
+      "labelPadding": 5
+    },
     "legend": {
+      "titleFontSize": 12,
+      "labelFontSize": 12,
+      "labelLimit": 150,
+      "symbolSize": 70,
       "orient": "bottom",
-      "titleColor": "#24302d",
-      "labelColor": "#46524f"
+      "columns": 3,
+      "titleLimit": 180,
+      "padding": 8,
+      "offset": 8
     }
   },
   "width": "container",
-  "height": 320,
-  "data": {
-    "url": "data/cleaned/fastfood_density.csv"
-  },
+  "height": 420,
   "projection": {
     "type": "mercator",
     "center": [
       134,
-      -27
+      -27.5
     ],
-    "scale": 520
+    "scale": 360
   },
   "layer": [
     {
       "data": {
         "url": "data/australia_states.geojson",
         "format": {
-          "type": "geojson"
+          "type": "json",
+          "property": "features"
         }
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#edf3ef",
-        "stroke": "#cfd8d2"
+        "fill": "#eef5f1",
+        "stroke": "#9aa9a2",
+        "strokeWidth": 0.5,
+        "opacity": 1
       }
     },
     {
+      "data": {
+        "url": "data/cleaned/fastfood_locations.csv"
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(datum.lon)",
+          "as": "longitude_num"
+        },
+        {
+          "calculate": "toNumber(datum.lat)",
+          "as": "latitude_num"
+        },
+        {
+          "calculate": "lower(datum.cuisine || '')",
+          "as": "cuisine_lower"
+        },
+        {
+          "calculate": "indexof(datum.cuisine_lower, 'burger') >= 0 ? 'Burger' : indexof(datum.cuisine_lower, 'chicken') >= 0 ? 'Chicken' : indexof(datum.cuisine_lower, 'pizza') >= 0 ? 'Pizza' : indexof(datum.cuisine_lower, 'sandwich') >= 0 ? 'Sandwich' : indexof(datum.cuisine_lower, 'fish') >= 0 ? 'Fish and chips' : indexof(datum.cuisine_lower, 'kebab') >= 0 ? 'Kebab' : indexof(datum.cuisine_lower, 'mexican') >= 0 ? 'Mexican' : 'Other/unclear'",
+          "as": "Outlet_Category"
+        },
+        {
+          "filter": "isValid(datum.longitude_num) && isValid(datum.latitude_num)"
+        }
+      ],
       "mark": {
         "type": "circle",
-        "opacity": 0.78,
-        "stroke": "white",
-        "strokeWidth": 1.5
+        "size": 8,
+        "opacity": 0.74
       },
       "encoding": {
         "longitude": {
-          "field": "lon"
+          "field": "longitude_num",
+          "type": "quantitative"
         },
         "latitude": {
-          "field": "lat"
-        },
-        "size": {
-          "field": "fast_food_pressure_proxy",
-          "type": "quantitative",
-          "scale": {
-            "range": [
-              120,
-              1600
-            ]
-          },
-          "title": "Proxy"
+          "field": "latitude_num",
+          "type": "quantitative"
         },
         "color": {
-          "field": "obesity_rate",
-          "type": "quantitative",
+          "field": "Outlet_Category",
+          "type": "nominal",
+          "title": "Outlet category",
           "scale": {
+            "domain": [
+              "Burger",
+              "Chicken",
+              "Pizza",
+              "Sandwich",
+              "Fish and chips",
+              "Kebab",
+              "Mexican",
+              "Other/unclear"
+            ],
             "range": [
-              "#f3ba77",
-              "#c7432f"
+              "#c7432f",
+              "#e66a35",
+              "#f0aa4b",
+              "#2e7d62",
+              "#2f9c95",
+              "#8e5b48",
+              "#4b345f",
+              "#9aa9a2"
             ]
-          },
-          "title": "Obesity %"
+          }
         },
         "tooltip": [
           {
-            "field": "state"
+            "field": "name",
+            "title": "Outlet"
           },
           {
-            "field": "fast_food_pressure_proxy"
+            "field": "brand",
+            "title": "Recorded brand"
           },
           {
-            "field": "obesity_rate"
+            "field": "Outlet_Category",
+            "title": "Outlet category"
+          },
+          {
+            "field": "cuisine",
+            "title": "OSM cuisine tag"
+          },
+          {
+            "field": "state",
+            "title": "State"
           }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "data/australia_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#4f5f58",
+        "strokeWidth": 0.75,
+        "opacity": 0.75
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 150,
+            "lat": -39,
+            "label": "Highest outlet density\nSydney & Melbourne corridor"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 11,
+        "fontWeight": 700,
+        "fill": "#24302d",
+        "align": "left",
+        "lineBreak": "\n"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/australia_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.STATE_CODE",
+          "as": "State_Label"
+        },
+        {
+          "calculate": "datum.properties.label_lon",
+          "as": "label_lon"
+        },
+        {
+          "calculate": "datum.properties.label_lat",
+          "as": "label_lat"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 9,
+        "fontWeight": 500,
+        "fill": "#3f4a46",
+        "stroke": null,
+        "strokeWidth": 2,
+        "opacity": 0.75
+      },
+      "encoding": {
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "State_Label"
+        }
+      }
     }
-  ]
+  ],
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": {
+    "top": 24,
+    "right": 18,
+    "bottom": 24,
+    "left": 12
+  }
 }

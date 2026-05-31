@@ -1,93 +1,182 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "title": {
-    "text": "The barriers are practical, not just educational",
-    "subtitle": "Lollipop ranking of access, intake and outcome barriers.",
+    "text": "Healthy Food Availability by Socioeconomic Status",
+    "subtitle": "Healthier food groups become more available as socioeconomic advantage increases.",
     "anchor": "start",
     "font": "Poppins",
     "fontSize": 18,
-    "subtitleFontSize": 12
+    "subtitleFontSize": 12,
+    "limit": 900,
+    "subtitleLimit": 900,
+    "offset": 10
   },
+
   "config": {
     "font": "Inter",
+
     "axis": {
       "labelColor": "#46524f",
       "titleColor": "#24302d",
-      "gridColor": "#e7ebe8",
-      "tickColor": "#d8ded9"
+      "grid": false,
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 10
     },
+
     "view": {
       "stroke": null
-    },
-    "legend": {
-      "orient": "bottom",
-      "titleColor": "#24302d",
-      "labelColor": "#46524f"
     }
   },
+
   "width": "container",
-  "height": 320,
+  "height": 280,
+
   "data": {
-    "url": "data/cleaned/lollipop_barriers.csv"
+    "url": "data/cleaned/section5_heatmap.csv"
   },
+  "transform": [
+    {
+      "calculate": "datum.quintile == 'Q1 Most disadvantaged' ? 'Q1' : datum.quintile == 'Q5 Least disadvantaged' ? 'Q5' : datum.quintile",
+      "as": "quintile_short"
+    }
+  ],
+
   "layer": [
     {
       "mark": {
-        "type": "bar",
-        "height": 3,
-        "color": "#d7ded8"
+        "type": "rect",
+        "cornerRadius": 4
       },
+
       "encoding": {
-        "y": {
-          "field": "barrier",
-          "type": "nominal",
-          "sort": {
-            "field": "percent",
-            "order": "descending"
-          },
-          "title": null
-        },
         "x": {
-          "field": "percent",
+          "field": "quintile_short",
+          "type": "ordinal",
+          "title": "Socioeconomic quintile",
+          "titleLimit": 260,
+          "labelAngle": -90,
+          "labelFontSize": 11
+        },
+
+        "y": {
+          "field": "food_group",
+          "type": "nominal",
+          "title": "Food group",
+          "sort": [
+            "Fruit",
+            "Vegetables",
+            "Grains and cereals",
+            "Meat & alternatives"
+          ]
+        },
+
+        "color": {
+          "field": "grams",
           "type": "quantitative",
-          "title": "%"
+          "title": "Availability (g per 10,000 kJ)",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 220,
+            "titleLimit": 300
+          },
+          "scale": {
+            "domain": [140, 260],
+            "range": [
+              "#dceee4",
+              "#9fc7cd",
+              "#67b7c7",
+              "#2f9c95",
+              "#2e7d62"
+            ]
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "food_group",
+            "title": "Food group"
+          },
+          {
+            "field": "quintile",
+            "title": "Quintile"
+          },
+          {
+            "field": "grams",
+            "title": "Grams per 10,000 kJ"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "fontWeight": 700,
+        "fontSize": 10,
+        "color": "#24302d"
+      },
+
+      "encoding": {
+        "x": {
+          "field": "quintile_short",
+          "type": "ordinal"
+        },
+
+        "y": {
+          "field": "food_group",
+          "type": "nominal"
+        },
+
+        "text": {
+          "field": "grams",
+          "type": "quantitative",
+          "format": ".0f"
         }
       }
     },
     {
-      "mark": {
-        "type": "circle",
-        "size": 160,
-        "color": "#e66a35",
-        "stroke": "white",
-        "strokeWidth": 1
-      },
-      "encoding": {
-        "y": {
-          "field": "barrier",
-          "type": "nominal",
-          "sort": {
-            "field": "percent",
-            "order": "descending"
-          }
-        },
-        "x": {
-          "field": "percent",
-          "type": "quantitative",
-          "title": "%"
-        },
-        "tooltip": [
+      "data": {
+        "values": [
           {
-            "field": "barrier"
-          },
-          {
-            "field": "group"
-          },
-          {
-            "field": "percent"
+            "food_group": "Fruit",
+            "quintile_short": "Q1",
+            "label": "Vegetables show\nthe largest gap (+31%)"
           }
         ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": -10,
+        "dy": -42,
+        "fontSize": 11,
+        "fontWeight": 800,
+        "color": "#24302d"
+      },
+      "encoding": {
+        "x": {
+          "field": "quintile_short",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "food_group",
+          "type": "nominal"
+        },
+        "text": {
+          "field": "label"
+        }
       }
     }
-  ]
+  ],
+
+  "padding": {
+    "top": 18,
+    "right": 12,
+    "bottom": 12,
+    "left": 12
+  }
 }

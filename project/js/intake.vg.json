@@ -1,12 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Recommended plates, actual plates",
-    "subtitle": "Most Australian Dietary Guideline groups sit below recommended serves.",
+    "text": "Recommended vs Actual Serves",
+    "subtitle": "Food groups are sorted by the largest gap from recommended daily serves.",
     "anchor": "start",
     "font": "Poppins",
     "fontSize": 18,
-    "subtitleFontSize": 12
+    "subtitleFontSize": 12,
+    "limit": 520,
+    "subtitleLimit": 560,
+    "offset": 10
   },
   "config": {
     "font": "Inter",
@@ -14,7 +17,12 @@
       "labelColor": "#46524f",
       "titleColor": "#24302d",
       "gridColor": "#e7ebe8",
-      "tickColor": "#d8ded9"
+      "tickColor": "#d8ded9",
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 10,
+      "labelLimit": 170,
+      "labelPadding": 5
     },
     "view": {
       "stroke": null
@@ -22,24 +30,40 @@
     "legend": {
       "orient": "bottom",
       "titleColor": "#24302d",
-      "labelColor": "#46524f"
+      "labelColor": "#46524f",
+      "titleFontSize": 12,
+      "labelFontSize": 12,
+      "labelLimit": 180,
+      "symbolType": "circle",
+      "symbolSize": 100,
+      "titleLimit": 180,
+      "padding": 2,
+      "offset": 2
     }
   },
   "width": "container",
-  "height": 320,
+  "height": 350,
   "data": {
     "url": "data/cleaned/healthy_vs_actual_intake.csv"
   },
   "transform": [
+    {
+      "calculate": "abs(datum.gap)",
+      "as": "Intake_Gap"
+    },
     {
       "fold": [
         "recommended_serves",
         "actual_serves"
       ],
       "as": [
-        "measure",
-        "serves"
+        "Measure",
+        "Serves"
       ]
+    },
+    {
+      "calculate": "datum.Measure == 'recommended_serves' ? 'Recommended serves' : 'Actual serves'",
+      "as": "Serve_Type"
     }
   ],
   "mark": {
@@ -50,45 +74,61 @@
     "y": {
       "field": "food_group",
       "type": "nominal",
-      "sort": "-x",
-      "title": null
+      "sort": {
+        "field": "Intake_Gap",
+        "order": "descending"
+      },
+      "title": "Food Group"
     },
     "x": {
-      "field": "serves",
+      "field": "Serves",
       "type": "quantitative",
-      "title": "Serves per 10,000 kJ"
+      "title": "Recommended vs Actual Daily Serves"
     },
     "color": {
-      "field": "measure",
+      "field": "Serve_Type",
       "type": "nominal",
+      "title": "Consumtion",
       "scale": {
         "domain": [
-          "recommended_serves",
-          "actual_serves"
+          "Recommended serves",
+          "Actual serves"
         ],
         "range": [
           "#2e7d62",
           "#e66a35"
         ]
-      },
-      "legend": {
-        "labelExpr": "datum.label == 'recommended_serves' ? 'Recommended' : 'Actual'"
       }
     },
-    "xOffset": {
-      "field": "measure"
+    "yOffset": {
+      "field": "Serve_Type"
     },
     "tooltip": [
       {
-        "field": "food_group"
+        "field": "food_group",
+        "title": "Food group"
       },
       {
-        "field": "measure"
+        "field": "Serve_Type",
+        "title": "Serve type"
       },
       {
-        "field": "serves",
+        "field": "Serves",
+        "title": "Daily serves",
         "format": ".1f"
+      },
+      {
+        "field": "gap",
+        "title": "Actual minus recommended",
+        "format": "+.1f"
       }
     ]
+  },
+
+  "padding": {
+    "top": 18,
+    "right": 18,
+    "bottom": 12,
+    "left": 12
   }
 }
