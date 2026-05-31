@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Exposure concentrates differently across the map",
-    "subtitle": "Bubbles show the same proxy at state centroids for direct comparison.",
+    "text": "Fast-food outlets mapped across Australia",
+    "subtitle": "OpenStreetMap amenity=fast_food outlet locations via Overpass.",
     "anchor": "start",
     "font": "Poppins",
     "fontSize": 18,
@@ -26,16 +26,10 @@
     }
   },
   "width": "container",
-  "height": 320,
-  "data": {
-    "url": "data/cleaned/fastfood_density.csv"
-  },
+  "height": 360,
   "projection": {
     "type": "mercator",
-    "center": [
-      134,
-      -27
-    ],
+    "center": [134, -27],
     "scale": 520
   },
   "layer": [
@@ -49,54 +43,51 @@
       "mark": {
         "type": "geoshape",
         "fill": "#edf3ef",
-        "stroke": "#cfd8d2"
+        "stroke": "#cfd8d2",
+        "strokeWidth": 0.8
       }
     },
     {
+      "data": {
+        "url": "data/cleaned/fastfood_locations.csv"
+      },
       "mark": {
         "type": "circle",
-        "opacity": 0.78,
+        "opacity": 0.42,
         "stroke": "white",
-        "strokeWidth": 1.5
+        "strokeWidth": 0.25
       },
       "encoding": {
         "longitude": {
-          "field": "lon"
+          "field": "lon",
+          "type": "quantitative"
         },
         "latitude": {
-          "field": "lat"
+          "field": "lat",
+          "type": "quantitative"
         },
         "size": {
-          "field": "fast_food_pressure_proxy",
-          "type": "quantitative",
-          "scale": {
-            "range": [
-              120,
-              1600
-            ]
-          },
-          "title": "Proxy"
+          "value": 10
         },
         "color": {
-          "field": "obesity_rate",
-          "type": "quantitative",
-          "scale": {
-            "range": [
-              "#f3ba77",
-              "#c7432f"
-            ]
-          },
-          "title": "Obesity %"
+          "value": "#e66a35"
         },
         "tooltip": [
           {
-            "field": "state"
+            "field": "name",
+            "title": "Outlet"
           },
           {
-            "field": "fast_food_pressure_proxy"
+            "field": "brand",
+            "title": "Brand"
           },
           {
-            "field": "obesity_rate"
+            "field": "cuisine",
+            "title": "Cuisine"
+          },
+          {
+            "field": "state",
+            "title": "State"
           }
         ]
       }
