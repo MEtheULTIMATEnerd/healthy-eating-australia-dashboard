@@ -1,12 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Food security splits sharply by income",
-    "subtitle": "A dumbbell-style access gap: secure versus insecure households.",
+    "text": "Food Security by Income",
+    "subtitle": "The lowest income quintile has the clearest food-insecurity gap.",
     "anchor": "start",
     "font": "Poppins",
     "fontSize": 18,
-    "subtitleFontSize": 12
+    "subtitleFontSize": 12,
+    "limit": 520,
+    "subtitleLimit": 560,
+    "offset": 10
   },
   "config": {
     "font": "Inter",
@@ -14,39 +17,54 @@
       "labelColor": "#46524f",
       "titleColor": "#24302d",
       "gridColor": "#e7ebe8",
-      "tickColor": "#d8ded9"
+      "tickColor": "#d8ded9",
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 10,
+      "labelLimit": 180,
+      "labelPadding": 5
     },
     "view": {
       "stroke": null
-    },
-    "legend": {
-      "orient": "bottom",
-      "titleColor": "#24302d",
-      "labelColor": "#46524f"
     }
   },
   "width": "container",
-  "height": 320,
+  "height": 350,
   "data": {
     "url": "data/cleaned/barriers_to_healthy_eating.csv"
+  },
+  "encoding": {
+    "y": {
+      "field": "income_group",
+      "type": "nominal",
+      "sort": [
+        "Lowest income quintile",
+        "2nd quintile",
+        "3rd quintile",
+        "4th quintile",
+        "Highest income quintile"
+      ],
+      "title": "Income group"
+    }
   },
   "layer": [
     {
       "mark": {
         "type": "rule",
-        "strokeWidth": 3,
+        "strokeWidth": 4,
         "color": "#ccd7cf"
       },
       "encoding": {
-        "y": {
-          "field": "income_group",
-          "type": "nominal",
-          "sort": null,
-          "title": null
-        },
         "x": {
           "field": "food_insecure",
-          "type": "quantitative"
+          "type": "quantitative",
+          "title": "Households (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
         },
         "x2": {
           "field": "food_secure"
@@ -56,26 +74,24 @@
     {
       "mark": {
         "type": "circle",
-        "size": 130,
+        "size": 170,
         "color": "#c7432f"
       },
       "encoding": {
-        "y": {
-          "field": "income_group",
-          "type": "nominal",
-          "sort": null
-        },
         "x": {
           "field": "food_insecure",
           "type": "quantitative",
-          "title": "% of households"
+          "title": "Households (%)"
         },
         "tooltip": [
           {
-            "field": "income_group"
+            "field": "income_group",
+            "title": "Income group"
           },
           {
-            "field": "food_insecure"
+            "field": "food_insecure",
+            "title": "Food-insecure households (%)",
+            "format": ".1f"
           }
         ]
       }
@@ -83,25 +99,24 @@
     {
       "mark": {
         "type": "circle",
-        "size": 130,
+        "size": 170,
         "color": "#2e7d62"
       },
       "encoding": {
-        "y": {
-          "field": "income_group",
-          "type": "nominal",
-          "sort": null
-        },
         "x": {
           "field": "food_secure",
-          "type": "quantitative"
+          "type": "quantitative",
+          "title": "Households (%)"
         },
         "tooltip": [
           {
-            "field": "income_group"
+            "field": "income_group",
+            "title": "Income group"
           },
           {
-            "field": "food_secure"
+            "field": "food_secure",
+            "title": "Food-secure households (%)",
+            "format": ".1f"
           }
         ]
       }
@@ -111,5 +126,16 @@
     "scale": {
       "x": "shared"
     }
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": {
+    "top": 18,
+    "right": 18,
+    "bottom": 12,
+    "left": 12
   }
 }
